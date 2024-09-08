@@ -11,14 +11,6 @@ import android.widget.ImageView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-
 import zihan.gridsim.R;
 
 public class ImageAdapter extends BaseAdapter {
@@ -55,6 +47,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
         imageView.setImageResource(grid.getCell(position).resourceID);
+        imageView.setRotation(grid.getCell(position).getRotation());
         return imageView;
     }
 }

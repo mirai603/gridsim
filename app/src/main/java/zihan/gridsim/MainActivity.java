@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
+
                         Log.d("HTTP",  response);
                         try {
                             JSONObject object = new JSONObject(response);
@@ -77,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
-
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
@@ -87,11 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 //test toast
                 //Toast.makeText(v.getContext(), Integer.toString(position), Toast.LENGTH_LONG).show();
                 Log.d("gridView", Integer.toString(position));
-                Log.d("gridView", gridData.getCell(position).toString());
+                Log.d("gridView", gridData.getCell(position).getCellInfo());
+                TextView text = (TextView) findViewById(R.id.gridData);
+                String displayText = gridData.getCell(position).getCellType() + "\n" + gridData.getCell(position).getCellInfo();
+                text.setText(displayText);
             }
         });
     }
-
 
     public void button1(View v) {
         Toast.makeText(this, "I'm Button 1", Toast.LENGTH_LONG).show();
@@ -101,7 +102,5 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "I'm Button 2", Toast.LENGTH_LONG).show();
     }
 
-    public void logtest(View v, int pos) {
-        Toast.makeText(this, pos, Toast.LENGTH_LONG).show();
-    }
+
 }

@@ -52,39 +52,11 @@ public class SimulationGrid {
     public void setUsingJSON(JSONArray arr) throws JSONException {
         //TODO: fill in your implementation
 
-        //TODO: SELF: FIX SPECIAL GID STUFF AND DIRECTION
+        GridCellFactory factory = new GridCellFactory();
         for (int i = 0; i < numRows; i++) {
             for (int j = 0; j < numCols; j++) {
                 int ID = Integer.parseInt(arr.getJSONArray(i).get(j).toString());
-                GridCell tempCell = new GridCell(i * numCols + j, i, j);
-
-                if (ID == 0) {
-                    tempCell.resourceID = R.drawable.blank;
-                } else if (ID == 1000) {
-                    tempCell.resourceID = R.drawable.tree;
-                } else if (ID > 1000 && ID < 2000 ) {
-                    tempCell.resourceID = R.drawable.bushes;
-                } else if (ID == 2002) {
-                    tempCell.resourceID = R.drawable.clover;
-                } else if (ID == 2003) {
-                    tempCell.resourceID = R.drawable.mushroom;
-                } else if (ID == 3000) {
-                    tempCell.resourceID = R.drawable.sunflower;
-                } else if (ID > 4000 && ID < 1000000) {
-                    // reserved
-                } else if (ID >= 1000000 && ID < 2000000) {
-                    tempCell.resourceID = R.drawable.gardender_icon;
-                } else if (ID >= 2000000 && ID < 3000000) {
-                    tempCell.resourceID = R.drawable.shovel_icon;
-                } else if (ID >= 10000000 && ID < 20000000) {
-                    tempCell.resourceID = R.drawable.golfcart_icon;
-                } else {
-                    // ??
-                    tempCell.resourceID = R.drawable.blank;
-                    Log.d("grid ID error", Integer.toString(ID));
-                }
-
-                setCell(i, j, tempCell);
+                setCell(i, j, factory.makeCell(ID, i, j));
             }
         }
 
