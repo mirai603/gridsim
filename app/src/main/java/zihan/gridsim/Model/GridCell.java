@@ -19,15 +19,11 @@ public class GridCell {
         resourceID = R.drawable.blank;
     }
     public Integer getResourceID() { return resourceID; }
+    public int getOrientation() { return 0; }
     public int getRotation() { return 0; }
     public int getRawValue() { return rawValue; }
 
 
-    // test purpose !!
-    @Override
-    public String toString() {
-        return String.format("raw: %d, r: %d, c: %d", rawValue, row, col);
-    }
 
     public String getCellType() { return "Empty"; }
     public String getCellInfo() { return "Location: (" + col + ", " + row + ")"; }

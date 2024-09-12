@@ -27,23 +27,22 @@ public class TurnableGardenerItem extends GardenerItem {
 
     public TurnableGardenerItem(int val, int r, int c) {
         super(val, r, c);
-        int typeVal = (val / GardenerType) * GardenerType;
+        int typeVal = (val / GardenerType) * GardenerType; // ERROR CODE
         int scaleFactor = 1000;
-        switch (typeVal) {
-            case GardenerType:
-                resourceID = R.drawable.gardender_icon;
-                orientation = val % 10;
-                cellType = "Gardener";
-                break;
-            case CartType:
-                resourceID = R.drawable.golfcart_icon;
-                orientation = val % 10;
-                cellType = "Cart";
-                scaleFactor *= 10;
-                break;
-            default:
-                orientation = UP;
-                break; //rest is already handled by parent class
+        if (val >= GardenerType && val < 2000000) {
+            typeVal = 1000000;
+            resourceID = R.drawable.gardender_icon;
+            orientation = val % 10;
+            cellType = "Gardener";
+        } else if (val >= CartType && val < 20000000) {
+            resourceID = R.drawable.golfcart_icon;
+            typeVal = 10000000;
+            orientation = val % 10;
+            cellType = "Cart";
+            scaleFactor *= 10;
+        } else {
+            orientation = UP;
+            //rest is already handled by parent class
         }
         gardenerId = (val - typeVal) / scaleFactor;
     }

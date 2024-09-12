@@ -20,6 +20,7 @@ public class GridCellFactory {
             // reserved
         } else if (val >= 1000000 && val < 2000000) {
             tempCell = new TurnableGardenerItem(val, row, col);
+
         } else if (val >= 2000000 && val < 3000000) {
             tempCell = new GardenerItem(val, row, col);
         } else if (val >= 10000000 && val < 20000000) {
@@ -27,6 +28,7 @@ public class GridCellFactory {
         } else {
             // ??
             Log.d("grid ID error", Integer.toString(val));
+            tempCell = new GridCell(0, row, col);
         }
 
         return tempCell;

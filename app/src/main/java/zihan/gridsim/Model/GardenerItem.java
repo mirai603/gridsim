@@ -20,7 +20,7 @@ public class GardenerItem extends GridCell {
         super(val, r, c);
 
         int typeVal = ShovelType;
-        int scaleFactor = 10000;
+        int scaleFactor = 1000;
         
         resourceID = R.drawable.shovel_icon;
         cellType = "Shovel";
