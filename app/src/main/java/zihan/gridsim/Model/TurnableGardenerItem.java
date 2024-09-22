@@ -27,7 +27,8 @@ public class TurnableGardenerItem extends GardenerItem {
 
     public TurnableGardenerItem(int val, int r, int c) {
         super(val, r, c);
-        int typeVal = (val / GardenerType) * GardenerType; // ERROR CODE
+        int typeVal = (val / GardenerType) * GardenerType;
+
         int scaleFactor = 1000;
         if (val >= GardenerType && val < 2000000) {
             typeVal = 1000000;
