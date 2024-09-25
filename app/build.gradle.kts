@@ -40,6 +40,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.mockito.mockito.android)
     implementation(libs.volley)
     implementation(libs.eventbus)
+    testImplementation(libs.org.mockito.mockito.core)
+    testImplementation(libs.json)
 }
