@@ -17,7 +17,6 @@ public class SimGridViewTest extends TestCase {
     @Mock
     Context mockContext;
 
-
     public void testGetGridViewFromSimGridView() {
         SimGridView facade = SimGridView.getInstance(mockContext);
         // then what?
