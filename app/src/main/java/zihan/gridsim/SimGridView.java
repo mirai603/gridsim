@@ -25,6 +25,7 @@ public class SimGridView {
     private ImageAdapter adapter;
     private TextView textView;
     private GridView gridView;
+    private EventBus bus;
     private int currentPosition;
     private boolean paused = false;
 
@@ -41,30 +42,50 @@ public class SimGridView {
     protected SimGridView(Context c) {
         this.gridData = new SimulationGrid(16, 16);
         this.adapter = new ImageAdapter(c, gridData);
+        this.bus = EventBus.getDefault();
+    }
+
+    // seam to work for test
+    public void setEventBus(EventBus bus) {
+        this.bus = bus;
+    }
+
+    // seam to work for test
+    public void setAdapter(ImageAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    // seam to work for test
+    public ImageAdapter getAdapter() {
+        return adapter;
     }
 
     public void attach(TextView tview, GridView gview) {
-        this.textView = tview;
-        this.gridView = gview;
+        if (tview != null && gview != null) {
+            this.textView = tview;
+            this.gridView = gview;
+        }
         this.gridView.setAdapter(adapter);
         this.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                Log.d("gridView", Integer.toString(position));
-                Log.d("gridView", gridData.getCell(position).getCellInfo());
+                //Log.d("gridView", Integer.toString(position));
+                //Log.d("gridView", gridData.getCell(position).getCellInfo());
                 currentPosition = position;
                 updateText(position);
             }
         });
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
+        if (!bus.isRegistered(this)) {
+            bus.register(this);
         }
 
     }
 
     public void detach() {
-        return;
+        this.textView = null;
+        this.gridView = null;
+        this.bus.unregister(this);
     }
 
     public boolean pause() {
@@ -97,7 +118,7 @@ public class SimGridView {
             gridData.setUsingJSON(arr);
             adapter.notifyDataSetChanged();
         } catch (JSONException e) {
-            Log.d("JSON ERR", e.toString());
+            //Log.d("JSON ERR", e.toString());
         }
 
     }

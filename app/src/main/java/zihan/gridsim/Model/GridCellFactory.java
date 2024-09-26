@@ -27,7 +27,7 @@ public class GridCellFactory {
             tempCell = new TurnableGardenerItem(val, row, col);
         } else {
             // ??
-            Log.d("grid ID error", Integer.toString(val));
+            //Log.d("grid ID error", Integer.toString(val));
             tempCell = new GridCell(0, row, col);
         }
 

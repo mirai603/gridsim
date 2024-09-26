@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         Poller poller = Poller.getInstance(this, facade);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        facade = SimGridView.getInstance(this);
+        facade.detach();
+    }
+
     public void button1(View v) {
         Toast.makeText(this, "I'm Button 1", Toast.LENGTH_LONG).show();
     }
